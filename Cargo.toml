@@ -1,0 +1,16 @@
+[package]
+name = "base62-uuid"
+version = "0.1.0"
+edition = "2021"
+description = "Minimalist crate to generate Base62 UUIDs"
+license = "MIT"
+repository = "https://github.com/qtfkwk/base62-uuid"
+
+[dependencies]
+base62 = "1.1.5"
+clap = { version = "3.1.8", features = ["derive"] }
+uuid = { version = "0.8.2", features = ["v4"] }
+
+[[bin]]
+name = "base62-uuid"
+path = "src/bin/main.rs"
