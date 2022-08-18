@@ -4,7 +4,6 @@ use std::io::stdin;
 
 /// Base62 UUID
 #[derive(Parser)]
-#[clap(name = "base62-uuid")]
 struct Args {
     /// Number of Base62 UUIDs to generate
     #[clap(short, long, default_value_t = 1)]
@@ -17,6 +16,10 @@ struct Args {
     /// Encode standard UUIDs to Base62 UUIDs
     #[clap(short, long)]
     encode: bool,
+
+    /// Pad UUIDs to 22 characters via leading zeroes
+    #[clap(short, long)]
+    pad: bool,
 }
 
 /// Command line interface
@@ -44,12 +47,12 @@ fn main() -> Result<(), String> {
             if s == "" {
                 break;
             }
-            println!("{}", encode(&s));
+            println!("{}", encode(&s, args.pad));
             line = String::new();
         }
     } else {
         for _ in 0..args.count {
-            println!("{}", base62_uuid());
+            println!("{}", base62_uuid(args.pad));
         }
     }
 

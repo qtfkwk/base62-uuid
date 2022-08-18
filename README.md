@@ -22,6 +22,7 @@ OPTIONS:
     -d, --decode           Decode Base62 UUIDs to standard UUIDs
     -e, --encode           Encode standard UUIDs to Base62 UUIDs
     -h, --help             Print help information
+    -p, --pad              Pad UUIDs to 22 characters via leading zeroes
 
 $ base62-uuid
 39IZVIfyOJ6H2PNswyWqlF
