@@ -2,7 +2,22 @@ use uuid::Uuid;
 
 /// Generate a Base62 UUID
 pub fn base62_uuid(pad: bool) -> String {
-    zero_pad(&base62::encode(Uuid::new_v4().as_u128()), pad)
+    zero_pad(&base62::encode(Uuid::new_v4().as_u128()), pad, 22)
+}
+
+/// Generate a u128 UUID
+pub fn u128_uuid(pad: bool) -> String {
+    zero_pad(&format!("{}", Uuid::new_v4().as_u128()), pad, 39)
+}
+
+/// Convert a u128 UUID into a standard hyphenated UUID
+pub fn decode_u128(s: &str) -> String {
+    Uuid::from_u128(s.parse::<u128>().unwrap()).to_hyphenated().to_string()
+}
+
+/// Convert a standard hyphenated UUID into a u128 UUID
+pub fn encode_u128(s: &str, pad: bool) -> String {
+    zero_pad(&format!("{}", Uuid::parse_str(s).unwrap().as_u128()), pad, 39)
 }
 
 /// Convert a Base62 UUID into a standard hyphenated UUID
@@ -12,16 +27,16 @@ pub fn decode(s: &str) -> String {
 
 /// Convert a standard hyphenated UUID into a Base62 UUID
 pub fn encode(s: &str, pad: bool) -> String {
-    zero_pad(&base62::encode(Uuid::parse_str(s).unwrap().as_u128()), pad)
+    zero_pad(&base62::encode(Uuid::parse_str(s).unwrap().as_u128()), pad, 22)
 }
 
-/// Optionally pad UUIDs to 22 characters via leading zeroes
-pub fn zero_pad(s: &str, pad: bool) -> String {
+/// Pad UUIDs via leading zeroes
+pub fn zero_pad(s: &str, pad: bool, n: usize) -> String {
     if !pad {
         return s.to_string();
     }
     let mut s = s.to_string();
-    while s.len() < 22 {
+    while s.len() < n {
         s.insert(0, '0');
     }
     s

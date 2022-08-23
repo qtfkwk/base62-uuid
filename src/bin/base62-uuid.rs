@@ -1,25 +1,30 @@
-use clap::Parser;
-use base62_uuid::{base62_uuid, decode, encode};
+use clap::{AppSettings, Parser};
+use base62_uuid::{base62_uuid, decode, decode_u128, encode, encode_u128, u128_uuid};
 use std::io::stdin;
 
 /// Base62 UUID
 #[derive(Parser)]
+#[clap(global_setting(AppSettings::DeriveDisplayOrder))]
 struct Args {
     /// Number of Base62 UUIDs to generate
     #[clap(short, long, default_value_t = 1)]
     count: usize,
 
-    /// Decode Base62 UUIDs to standard UUIDs
+    /// Decode Base62 UUIDs from STDIN to standard UUIDs
     #[clap(short, long)]
     decode: bool,
 
-    /// Encode standard UUIDs to Base62 UUIDs
+    /// Encode standard UUIDs from STDIN to Base62 UUIDs
     #[clap(short, long)]
     encode: bool,
 
-    /// Pad UUIDs to 22 characters via leading zeroes
+    /// Pad UUIDs with leading zeroes
     #[clap(short, long)]
     pad: bool,
+
+    /// Generate/encode/decode u128 UUIDs instead of Base62 UUIDs
+    #[clap(short)]
+    u: bool,
 }
 
 /// Command line interface
@@ -37,7 +42,11 @@ fn main() -> Result<(), String> {
             if s == "" {
                 break;
             }
-            println!("{}", decode(&s));
+            if args.u {
+                println!("{}", decode_u128(&s));
+            } else {
+                println!("{}", decode(&s));
+            }
             line = String::new();
         }
     } else if args.encode {
@@ -47,8 +56,16 @@ fn main() -> Result<(), String> {
             if s == "" {
                 break;
             }
-            println!("{}", encode(&s, args.pad));
+            if args.u {
+                println!("{}", encode_u128(&s, args.pad));
+            } else {
+                println!("{}", encode(&s, args.pad));
+            }
             line = String::new();
+        }
+    } else if args.u {
+        for _ in 0..args.count {
+            println!("{}", u128_uuid(args.pad));
         }
     } else {
         for _ in 0..args.count {
