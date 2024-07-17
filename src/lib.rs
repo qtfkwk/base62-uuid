@@ -7,27 +7,35 @@ pub fn base62_uuid(pad: bool) -> String {
 
 /// Generate a u128 UUID
 pub fn u128_uuid(pad: bool) -> String {
-    zero_pad(&format!("{}", Uuid::new_v4().as_u128()), pad, 39)
+    zero_pad(&Uuid::new_v4().as_u128().to_string(), pad, 39)
 }
 
 /// Convert a u128 UUID into a standard hyphenated UUID
 pub fn decode_u128(s: &str) -> String {
-    Uuid::from_u128(s.parse::<u128>().unwrap()).to_hyphenated().to_string()
+    Uuid::from_u128(s.parse::<u128>().unwrap())
+        .hyphenated()
+        .to_string()
 }
 
 /// Convert a standard hyphenated UUID into a u128 UUID
 pub fn encode_u128(s: &str, pad: bool) -> String {
-    zero_pad(&format!("{}", Uuid::parse_str(s).unwrap().as_u128()), pad, 39)
+    zero_pad(&Uuid::parse_str(s).unwrap().as_u128().to_string(), pad, 39)
 }
 
 /// Convert a Base62 UUID into a standard hyphenated UUID
 pub fn decode(s: &str) -> String {
-    Uuid::from_u128(base62::decode(s).unwrap()).to_hyphenated().to_string()
+    Uuid::from_u128(base62::decode(s).unwrap())
+        .hyphenated()
+        .to_string()
 }
 
 /// Convert a standard hyphenated UUID into a Base62 UUID
 pub fn encode(s: &str, pad: bool) -> String {
-    zero_pad(&base62::encode(Uuid::parse_str(s).unwrap().as_u128()), pad, 22)
+    zero_pad(
+        &base62::encode(Uuid::parse_str(s).unwrap().as_u128()),
+        pad,
+        22,
+    )
 }
 
 /// Pad UUIDs via leading zeroes

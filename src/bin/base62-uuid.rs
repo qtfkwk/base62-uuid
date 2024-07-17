@@ -1,10 +1,9 @@
-use clap::{AppSettings, Parser};
 use base62_uuid::{base62_uuid, decode, decode_u128, encode, encode_u128, u128_uuid};
+use clap::Parser;
 use std::io::stdin;
 
 /// Base62 UUID
 #[derive(Parser)]
-#[clap(global_setting(AppSettings::DeriveDisplayOrder))]
 struct Args {
     /// Number of Base62 UUIDs to generate
     #[clap(short, long, default_value_t = 1)]
@@ -32,20 +31,22 @@ fn main() -> Result<(), String> {
     let args = Args::parse();
 
     if args.decode && args.encode {
-        return Err(String::from("Decode and encode options are mutually exclusive."));
+        return Err(String::from(
+            "Decode and encode options are mutually exclusive.",
+        ));
     }
 
     if args.decode {
         let mut line = String::new();
         while stdin().read_line(&mut line).is_ok() {
             let s = line.trim();
-            if s == "" {
+            if s.is_empty() {
                 break;
             }
             if args.u {
-                println!("{}", decode_u128(&s));
+                println!("{}", decode_u128(s));
             } else {
-                println!("{}", decode(&s));
+                println!("{}", decode(s));
             }
             line = String::new();
         }
@@ -53,13 +54,13 @@ fn main() -> Result<(), String> {
         let mut line = String::new();
         while stdin().read_line(&mut line).is_ok() {
             let s = line.trim();
-            if s == "" {
+            if s.is_empty() {
                 break;
             }
             if args.u {
-                println!("{}", encode_u128(&s, args.pad));
+                println!("{}", encode_u128(s, args.pad));
             } else {
-                println!("{}", encode(&s, args.pad));
+                println!("{}", encode(s, args.pad));
             }
             line = String::new();
         }
