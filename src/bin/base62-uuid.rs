@@ -4,7 +4,8 @@ use std::io::stdin;
 
 /// Base62 UUID
 #[derive(Parser)]
-struct Args {
+#[command(version, term_width = 80)]
+struct Cli {
     /// Number of Base62 UUIDs to generate
     #[clap(short, long, default_value_t = 1)]
     count: usize,
@@ -28,49 +29,49 @@ struct Args {
 
 /// Command line interface
 fn main() -> Result<(), String> {
-    let args = Args::parse();
+    let cli = Cli::parse();
 
-    if args.decode && args.encode {
+    if cli.decode && cli.encode {
         return Err(String::from(
             "Decode and encode options are mutually exclusive.",
         ));
     }
 
-    if args.decode {
+    if cli.decode {
         let mut line = String::new();
         while stdin().read_line(&mut line).is_ok() {
             let s = line.trim();
             if s.is_empty() {
                 break;
             }
-            if args.u {
+            if cli.u {
                 println!("{}", decode_u128(s));
             } else {
                 println!("{}", decode(s));
             }
             line = String::new();
         }
-    } else if args.encode {
+    } else if cli.encode {
         let mut line = String::new();
         while stdin().read_line(&mut line).is_ok() {
             let s = line.trim();
             if s.is_empty() {
                 break;
             }
-            if args.u {
-                println!("{}", encode_u128(s, args.pad));
+            if cli.u {
+                println!("{}", encode_u128(s, cli.pad));
             } else {
-                println!("{}", encode(s, args.pad));
+                println!("{}", encode(s, cli.pad));
             }
             line = String::new();
         }
-    } else if args.u {
-        for _ in 0..args.count {
-            println!("{}", u128_uuid(args.pad));
+    } else if cli.u {
+        for _ in 0..cli.count {
+            println!("{}", u128_uuid(cli.pad));
         }
     } else {
-        for _ in 0..args.count {
-            println!("{}", base62_uuid(args.pad));
+        for _ in 0..cli.count {
+            println!("{}", base62_uuid(cli.pad));
         }
     }
 

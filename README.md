@@ -11,64 +11,78 @@ Minimalist crate to generate Base62 UUIDs
 
 ```text
 $ base62-uuid -h
-base62-uuid 
 Base62 UUID
 
-USAGE:
-    base62-uuid [OPTIONS]
+Usage: base62-uuid [OPTIONS]
 
-OPTIONS:
-    -c, --count <COUNT>    Number of Base62 UUIDs to generate [default: 1]
-    -d, --decode           Decode Base62 UUIDs from STDIN to standard UUIDs
-    -e, --encode           Encode standard UUIDs from STDIN to Base62 UUIDs
-    -p, --pad              Pad UUIDs with leading zeroes
-    -u                     Generate/encode/decode u128 UUIDs instead of Base62 UUIDs
-    -h, --help             Print help information
+Options:
+  -c, --count <COUNT>  Number of Base62 UUIDs to generate [default: 1]
+  -d, --decode         Decode Base62 UUIDs from STDIN to standard UUIDs
+  -e, --encode         Encode standard UUIDs from STDIN to Base62 UUIDs
+  -p, --pad            Pad UUIDs with leading zeroes
+  -u                   Generate/encode/decode u128 UUIDs instead of Base62 UUIDs
+  -h, --help           Print help
+  -V, --version        Print version
+```
 
+```text
+$ base62-uuid -V
+base62-uuid 2.0.0
+```
+
+```text
 $ base62-uuid
-39IZVIfyOJ6H2PNswyWqlF
+44q7vJFEYzX5sn0GTYeZl7
+```
 
+```text
 $ base62-uuid -c 5 |tee temp
-25mciqn6Uj2Y1fQv8Fj63m
-1xFonVhl6BAY08Wxfbywao
-75iEHpyZYYeQaAeAuY9Cab
-47uxUuSrZYUZTM5NnIHjmk
-4EzikvWmOBBrmVbQnHMocK
+477hvayLG40yBF5sYGRbNp
+5WjZC3o8Lu8a1dCRSO7445
+595ozvxDHiI92gWop9fX2E
+oCLfbA0rGcG6fpkDnpQWb
+8eUzHF5mRqDiiUwvHg3ww
+```
 
-$ cat temp |base62-uuid -d |tee temp-decoded
-44c771c2-d628-4d84-a5ed-3c53025848ca
-40425315-ca7c-4711-9249-28ccf86189e2
-e9069abf-adb7-4e02-ae6a-ff3885badb65
-879fba26-6ba4-48f8-af5e-0cfa32155c3a
-8b5fd11e-bbe2-41ea-9f3a-52f85fcdef50
+```text
+$ base62-uuid -d <temp |tee temp-decoded
+8733f4fa-1e21-4a10-a065-aed1571eca41
+b5a1d474-13eb-4e57-af00-9e9a19bce595
+a91a84e9-8640-4685-8ab5-4c1b43a86e76
+1a9a5fb2-3cd7-4eea-a365-b5e3a14ab225
+0495f4f8-bfd6-4066-85c8-648fbb327572
+```
 
-$ cat temp-decoded |base62-uuid -e |tee temp-encoded
-25mciqn6Uj2Y1fQv8Fj63m
-1xFonVhl6BAY08Wxfbywao
-75iEHpyZYYeQaAeAuY9Cab
-47uxUuSrZYUZTM5NnIHjmk
-4EzikvWmOBBrmVbQnHMocK
+```text
+$ base62-uuid -e <temp-decoded
+477hvayLG40yBF5sYGRbNp
+5WjZC3o8Lu8a1dCRSO7445
+595ozvxDHiI92gWop9fX2E
+oCLfbA0rGcG6fpkDnpQWb
+8eUzHF5mRqDiiUwvHg3ww
+```
 
-$ b3sum temp temp-encoded
-8a22bc391bed5d0ee9c3b326d3251602df5ee1d52ab5f62f6538bc2e0531e5bb  temp
-8a22bc391bed5d0ee9c3b326d3251602df5ee1d52ab5f62f6538bc2e0531e5bb  temp-encoded
-
+```text
 $ base62-uuid -u
-322307542572217969934229690286784727300
+123181482011302909886179025827763753137
+```
 
+```text
 $ base62-uuid -uc 5
-14982542445497376152403689592424402944
-172687757666081737260525696030870372042
-43167745396421733066649374535242967096
-286929222040204797401597000791353515341
-317248292745988805767278411123975748262
+1547323194265792858496136677828949708
+152390338469044313744374123164830390474
+40746094517207513339150042445972545861
+311687206025234608037526505270147717055
+237892160212180305199647675308449469415
+```
 
+```text
 $ base62-uuid -puc 5
-145208551251690730667864324716102711897
-147013240575534556220474725701279222198
-098510246896224898774321662663208667390
-083581755085478548623485238303158515246
-168393287624526834515206282224381425158
+019732916859402206693754687592923949838
+319602182278917338120780681235125858760
+221822346344209788450828427055017358482
+043273776146999055742651614111372982641
+294244154071858359744938058964118637506
 ```
 
 # Library functions
