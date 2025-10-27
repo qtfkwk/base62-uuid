@@ -1,5 +1,5 @@
 use base62_uuid::{base62_uuid, decode, decode_u128, encode, encode_u128, u128_uuid};
-use clap::{builder::Styles, Parser};
+use clap::{Parser, builder::Styles};
 use std::io::stdin;
 
 const STYLES: Styles = Styles::styled()

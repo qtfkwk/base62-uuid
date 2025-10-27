@@ -4,9 +4,10 @@
     * 1.1.0 (2022-08-23): Added u128 option/functions
         * 1.1.1 (2024-07-17): fix clippy; rustfmt; update dependencies
 * 2.0.0 (2024-08-06): Add `Makefile.md`; add `-V` option; update dependencies
-* 2.1.0 (2024-10-24): Add clap color; update dependencies
-    * 2.1.1 (2024-12-04): Update dependencies; add commit target to makefile
-    * 2.1.2 (2025-02-20): Update dependencies
-    * 2.1.3 (2025-04-16): Update dependencies
-* 2.2.0 (2025-08-28): Update dependencies; 2024 edition
+    * 2.1.0 (2024-10-24): Add clap color; update dependencies
+        * 2.1.1 (2024-12-04): Update dependencies; add commit target to makefile
+        * 2.1.2 (2025-02-20): Update dependencies
+        * 2.1.3 (2025-04-16): Update dependencies
+    * 2.2.0 (2025-08-28): Update dependencies; 2024 edition
+        * 2.2.1 (2025-10-27): Update dependencies; cargo fmt
 

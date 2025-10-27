@@ -1,13 +1,13 @@
 [package]
 name = "base62-uuid"
-version = "2.2.0"
+version = "2.2.1"
 edition = "2024"
 description = "Minimalist crate to generate Base62 UUIDs"
 license = "MIT"
 repository = "https://github.com/qtfkwk/base62-uuid"
 
 [dependencies]
-base62 = "2.2.2"
-clap = { version = "4.5.46", features = ["derive"] }
-clap-cargo = "0.17.0"
-uuid = { version = "1.18.0", features = ["v4"] }
+base62 = "2.2.3"
+clap = { version = "4.5.50", features = ["derive"] }
+clap-cargo = "0.18.3"
+uuid = { version = "1.18.1", features = ["v4"] }
