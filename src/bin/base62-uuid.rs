@@ -1,19 +1,14 @@
-use base62_uuid::{base62_uuid, decode, decode_u128, encode, encode_u128, u128_uuid};
-use clap::{Parser, builder::Styles};
-use std::io::stdin;
-
-const STYLES: Styles = Styles::styled()
-    .header(clap_cargo::style::HEADER)
-    .usage(clap_cargo::style::USAGE)
-    .literal(clap_cargo::style::LITERAL)
-    .placeholder(clap_cargo::style::PLACEHOLDER)
-    .error(clap_cargo::style::ERROR)
-    .valid(clap_cargo::style::VALID)
-    .invalid(clap_cargo::style::INVALID);
+use {
+    base62_uuid::{base62_uuid, decode, decode_u128, encode, encode_u128, u128_uuid},
+    clap::Parser,
+    clap_cargo::style::CLAP_STYLING,
+    std::io::stdin,
+};
 
 /// Base62 UUID
+#[allow(clippy::struct_excessive_bools)]
 #[derive(Parser)]
-#[command(version, term_width = 80, styles = STYLES)]
+#[command(version, max_term_width = 80, styles = CLAP_STYLING)]
 struct Cli {
     /// Number of Base62 UUIDs to generate
     #[clap(short, long, default_value_t = 1)]
