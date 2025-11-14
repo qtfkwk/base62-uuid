@@ -1,3 +1,5 @@
+# Changelog
+
 * 0.1.0 (2022-04-09): Initial
 * 0.2.0 (2022-04-10): Added decode/encode functions/options and readme
 * 1.0.0 (2022-08-18): Added padding feature
@@ -12,4 +14,5 @@
         * 2.2.1 (2025-10-27): Update dependencies; cargo fmt
         * 2.2.2 (2025-11-11): Update dependencies; use [`clap-cargo`] `CLAP_STYLING`; clippy fixes
         * 2.2.3 (2025-11-14): Update dependencies; add `clippy::pedantic` to `cargo clippy` command in the `clippy` target in the makefile
+        * 2.2.4 (2025-11-14): Update dependencies (none); fix changelog
 

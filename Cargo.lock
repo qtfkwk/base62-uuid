@@ -60,7 +60,7 @@ checksum = "1adf9755786e27479693dedd3271691a92b5e242ab139cacb9fb8e7fb5381111"
 
 [[package]]
 name = "base62-uuid"
-version = "2.2.3"
+version = "2.2.4"
 dependencies = [
  "base62",
  "clap",
