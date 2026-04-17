@@ -16,4 +16,5 @@
         * 2.2.3 (2025-11-14): Update dependencies; add `clippy::pedantic` to `cargo clippy` command in the `clippy` target in the makefile
         * 2.2.4 (2025-11-14): Update dependencies (none); fix changelog
         * 2.2.5 (2026-03-03): Update dependencies
+        * 2.2.6 (2026-04-17): Update dependencies
 
